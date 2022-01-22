@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import BreweryApi from './interfaces/brewery_interface';
+import BreweriesList from './components/BreweriesList';
+import SearchBar from './components/SearchBar';
 import './App.css';
 
 function App() {
+
+  const [breweries, setBreweries] = useState<BreweryApi[]>([]);
+  const [filter, setNewFilter] = useState('');
+
+  useEffect(() => {
+    axios.get('https://api.openbrewerydb.org/breweries')
+      .then(resposnse => {
+        setBreweries(resposnse.data)
+      })
+  }, []);
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewFilter(event.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SearchBar filter={filter} handleFilterChange={handleFilterChange} />
+      <BreweriesList data={breweries} filter={filter} />
     </div>
   );
 }
