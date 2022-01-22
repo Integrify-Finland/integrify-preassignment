@@ -20,9 +20,6 @@ function BreweriesList({ data, filter }: { data: Array<BreweryApi>, filter: stri
     return bool;
   });
 
-
-
-
   displayBreweries.forEach(element => {
     brewList.push(
       <Grid item xs={12} md={4} key={element.id}>
@@ -30,7 +27,7 @@ function BreweriesList({ data, filter }: { data: Array<BreweryApi>, filter: stri
       </Grid>);
   });
   return (
-    <div>
+    <div style={{ margin: "auto", width: "80%" }}>
       <Grid container spacing={2}>
         {brewList}
       </Grid>

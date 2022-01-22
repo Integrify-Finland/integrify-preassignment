@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div style={{ width: "70%", backgroundColor: "grey", margin: "auto" }} >
       <SearchBar filter={filter} handleFilterChange={handleFilterChange} />
       <BreweriesList data={breweries} filter={filter} />
     </div>
